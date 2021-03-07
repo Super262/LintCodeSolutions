@@ -1,0 +1,2 @@
+# LintCodeSolutions
+Solutions for LintCode.

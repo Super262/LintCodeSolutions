@@ -8,8 +8,8 @@ class Solution:
     def hashCode(self, key, HASH_SIZE):
         # This solution won't exceed the time limit.
         result = 0
-        keyLen = len(key)
-        for i in range(keyLen):
+        key_len = len(key)
+        for i in range(key_len):
             result *= 33
             result %= HASH_SIZE
             result += ord(key[i])

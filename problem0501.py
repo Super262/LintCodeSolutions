@@ -6,6 +6,8 @@ class Tweet:
 
 class MiniTwitter:
 
+    # Pull Model
+
     def __init__(self):
         self.order = 0
         self.users_tweets = {}

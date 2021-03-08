@@ -11,7 +11,7 @@ class Solution:
         key_len = len(key)
         for i in range(key_len):
             result *= 33
-            result %= HASH_SIZE
             result += ord(key[i])
+            result %= HASH_SIZE
         result %= HASH_SIZE
         return result

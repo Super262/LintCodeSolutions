@@ -13,5 +13,4 @@ class Solution:
             result *= 33
             result += ord(key[i])
             result %= HASH_SIZE
-        result %= HASH_SIZE
         return result

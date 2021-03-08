@@ -1,5 +1,5 @@
 def test():
-    print(max((4,), (3, 1)))
+    print()
 
 
 if __name__ == '__main__':

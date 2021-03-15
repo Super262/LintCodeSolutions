@@ -18,4 +18,4 @@ class Solution:
             if t in expected_set:
                 return [numbers_dict[t], i]
             expected_set.add(numbers[i])
-        return []
+        return [-1, -1]

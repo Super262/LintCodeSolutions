@@ -5,7 +5,7 @@ class Solution:
     """
 
     def canJump(self, a: list) -> bool:
-        if not list:
+        if not a:
             return False
         last_index = len(a) - 1
         global_limit = 0

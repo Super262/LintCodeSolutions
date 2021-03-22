@@ -21,9 +21,7 @@ class Solution:
             while i <= j and a[j] > pivot:
                 j -= 1
             if i <= j:
-                temp = a[i]
-                a[i] = a[j]
-                a[j] = temp
+                a[i], a[j] = a[j], a[i]
                 i += 1
                 j -= 1
         self.quick_sort(a, start, j)

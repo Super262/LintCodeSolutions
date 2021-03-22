@@ -8,9 +8,9 @@ class Solution:
     def kthLargestElement(self, n: int, nums: list) -> int:
         if not nums or n < 1:
             return -1
-        return self.quick_select(nums, 0, len(nums) - 1, n)
+        return self.quick_select_largest(nums, 0, len(nums) - 1, n)
 
-    def quick_select(self, nums: list, start: int, end: int, k: int) -> int:
+    def quick_select_largest(self, nums: list, start: int, end: int, k: int) -> int:
         if start >= end:
             return nums[start]
         pivot = nums[start + (end - start) // 2]
@@ -26,7 +26,7 @@ class Solution:
                 i += 1
                 j -= 1
         if start + k - 1 <= j:
-            return self.quick_select(nums, start, j, k)
+            return self.quick_select_largest(nums, start, j, k)
         if start + k - 1 >= i:
-            return self.quick_select(nums, i, end, k - (i - start))
+            return self.quick_select_largest(nums, i, end, k - (i - start))
         return nums[j + 1]

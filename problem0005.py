@@ -22,9 +22,7 @@ class Solution:
             while i <= j and nums[j] < pivot:
                 j -= 1
             if i <= j:
-                temp = nums[i]
-                nums[i] = nums[j]
-                nums[j] = temp
+                nums[i], nums[j] = nums[j], nums[i]
                 i += 1
                 j -= 1
         if start + k - 1 <= j:

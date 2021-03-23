@@ -4,11 +4,11 @@ class Solution:
         results = []
         if not numbers:
             return results
-        bound_a = len(numbers) - 3
-        if bound_a < 1:
-            return results
-        bound_b = len(numbers) - 2
         bound_d = len(numbers)
+        if bound_d < 4:
+            return results
+        bound_b = bound_d - 2
+        bound_a = bound_b - 1
         numbers.sort()
         for a in range(bound_a):
             if a > 0 and numbers[a - 1] == numbers[a]:

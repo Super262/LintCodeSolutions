@@ -4,11 +4,11 @@ class Solution:
         results = []
         if not numbers:
             return results
-        bound_a = len(numbers) - 4
-        if not bound_a:
+        bound_a = len(numbers) - 3
+        if bound_a < 1:
             return results
-        bound_b = len(numbers) - 3
-        bound_d = len(numbers) - 1
+        bound_b = len(numbers) - 2
+        bound_d = len(numbers)
         numbers.sort()
         for a in range(bound_a):
             if a > 0 and numbers[a - 1] == numbers[a]:
@@ -22,17 +22,17 @@ class Solution:
 
     def two_sum(self, sorted_arr: list, start: int, end: int, target: int, prefix1: int, prefix2: int,
                 results: list) -> None:
-        while start < end:
-            if sorted_arr[start] + sorted_arr[end] == target:
-                results.append([prefix1, prefix2, sorted_arr[start], sorted_arr[end]])
+        while start < end - 1:
+            if sorted_arr[start] + sorted_arr[end - 1] == target:
+                results.append([prefix1, prefix2, sorted_arr[start], sorted_arr[end - 1]])
                 end -= 1
                 start += 1
 
                 # Don't forget this part!
-                while 0 < start < end and sorted_arr[start - 1] == sorted_arr[start]:
+                while 0 < start < end - 1 and sorted_arr[start - 1] == sorted_arr[start]:
                     start += 1
 
-            elif sorted_arr[start] + sorted_arr[end] > target:
+            elif sorted_arr[start] + sorted_arr[end - 1] > target:
                 end -= 1
             else:
                 start += 1

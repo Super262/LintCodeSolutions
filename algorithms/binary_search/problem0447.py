@@ -4,7 +4,7 @@ class Solution:
         kth = 1
         while reader.get(kth - 1) < target:
             kth *= 2
-        start = 0
+        start = kth // 2
         end = kth - 1
         while start + 1 < end:
             mid = start + (end - start) // 2

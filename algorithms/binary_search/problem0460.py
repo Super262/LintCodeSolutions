@@ -30,6 +30,7 @@ class Solution:
             return start
         if nums[end] >= target:
             return end
+        # 最后一定要返回数组长度作为无效值
         return len(nums)
 
     def is_left_closer(self, nums: list, left: int, target: int, right: int) -> bool:

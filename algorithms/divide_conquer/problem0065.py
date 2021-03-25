@@ -1,11 +1,11 @@
 class Solution:
 
-    def findMedianSortedArrays(self, A: list, B: list) -> float:
-        n = len(A) + len(B)
+    def findMedianSortedArrays(self, nums1: list, nums2: list) -> float:
+        n = len(nums1) + len(nums2)
         if n % 2 == 0:
-            return (self.find_kth(A, 0, B, 0, n // 2) + self.find_kth(A, 0, B, 0, n // 2 + 1)) / 2.0
+            return (self.find_kth(nums1, 0, nums2, 0, n // 2) + self.find_kth(nums1, 0, nums2, 0, n // 2 + 1)) / 2.0
         else:
-            return self.find_kth(A, 0, B, 0, n // 2 + 1)
+            return self.find_kth(nums1, 0, nums2, 0, n // 2 + 1)
 
     def find_kth(self, a: list, start_a: int, b: list, start_b: int, k: int) -> int:
         if start_a >= len(a):
@@ -15,11 +15,11 @@ class Solution:
         if k == 1:
             # k = 1 时，我们需要特殊处理，因为我们无法对 k 进行合法分割
             return min(a[start_a], b[start_b])
-        if start_a + k // 2 - 1 > len(a):
+        if start_a + k // 2 - 1 >= len(a):
             half_k_of_a = 2147483647
         else:
             half_k_of_a = a[start_a + k // 2 - 1]
-        if start_b + k // 2 - 1 > len(b):
+        if start_b + k // 2 - 1 >= len(b):
             half_k_of_b = 2147483647
         else:
             half_k_of_b = b[start_b + k // 2 - 1]

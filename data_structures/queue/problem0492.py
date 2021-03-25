@@ -9,11 +9,11 @@ class MyQueue:
             self.tail = self.head
         else:
             self.tail.next = Node(item)
-            self.tail = self.tail.next
+            self.tail = self.tail.next_val
 
     def dequeue(self) -> int:
         popped_value = self.head.val
-        self.head = self.head.next
+        self.head = self.head.next_val
         return popped_value
 
 

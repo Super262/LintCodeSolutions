@@ -8,7 +8,7 @@ class DLinkedNode:
 
 def remove_node(node: DLinkedNode) -> DLinkedNode:
     node.next.prev = node.prev
-    node.prev.next = node.next
+    node.prev.next_val = node.next
     node.prev = None
     node.next = None
     return node
@@ -36,7 +36,7 @@ class LRUCache:
     def pop_right(self) -> DLinkedNode:
         node = self.tail.prev
         self.tail.prev = node.prev
-        node.prev.next = self.tail
+        node.prev.next_val = self.tail
         return node
 
     """

@@ -18,18 +18,17 @@ class BSTIterator:
     def __init__(self, root: TreeNode) -> None:
         self.root = root
         self.stack = []
-        cur_node = self.root
-        while cur_node:
-            self.stack.append(cur_node)
-            cur_node = cur_node.left
+        self.find_most_left(self.root)
 
     def hasNext(self) -> bool:
         return len(self.stack) > 0
 
     def _next(self) -> TreeNode:
         cur_node = self.stack.pop()
-        cur_next = cur_node.right
-        while cur_next:
-            self.stack.append(cur_next)
-            cur_next = cur_next.left
+        self.find_most_left(cur_node.right)
         return cur_node
+
+    def find_most_left(self, cur_node: TreeNode):
+        while cur_node:
+            self.stack.append(cur_node)
+            cur_node = cur_node.left

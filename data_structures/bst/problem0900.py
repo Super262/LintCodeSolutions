@@ -12,28 +12,19 @@ class Solution:
     """
 
     def closestValue(self, root: TreeNode, target: float) -> int:
-        result = 2147483647
-        if not root:
-            return result
-        stack = []
-        dis = 2147483647
-        self.find_most_left(stack, root)
-        while self.has_next(stack):
-            cur_val = self.next_val(stack)
-            if abs(cur_val - target) < dis:
-                result = cur_val
-                dis = abs(cur_val - target)
-        return result
-
-    def has_next(self, stack: list) -> bool:
-        return len(stack) > 0
-
-    def next_val(self, stack: list) -> int:
-        node = stack.pop()
-        self.find_most_left(stack, node.right)
-        return node.val
-
-    def find_most_left(self, stack: list, root: TreeNode) -> None:
+        upper = root
+        lower = root
         while root:
-            stack.append(root)
-            root = root.left
+            if root.val > target:
+                upper = root
+                root = root.left
+            elif root.val < target:
+                lower = root
+                root = root.right
+            else:
+                return root.val
+        # 注意 upper.val 不一定比 target 大；lower.val 不一定比 target 小
+        if abs(upper.val - target) < abs(target - lower.val):
+            return upper.val
+        else:
+            return lower.val

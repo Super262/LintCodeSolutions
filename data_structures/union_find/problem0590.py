@@ -13,8 +13,8 @@ class ConnectingGraph2:
         if root_b != root_a:
             self.size[root_a] += self.size[root_b]
             self.father[root_b] = root_a
-        root_a = self.find(a)
-        root_b = self.find(b)
+        self.find(a)
+        self.find(b)
 
     def query(self, a: int) -> int:
         return self.size[self.find(a)]

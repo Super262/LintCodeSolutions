@@ -10,19 +10,22 @@ class Solution:
                 email_user[a[ei]] = a[0]
                 email_father[a[ei]] = a[ei]
         for a in accounts:
-            for ei in range(1, len(a) - 1):
-                self.union(email_father, a[ei], a[ei + 1])
-        email_cluster = {}
-        for child in email_father:
-            f = email_father[child]
-            if f not in email_cluster:
-                email_cluster[f] = []
-            email_cluster[f].append(child)
+            for ei in range(2, len(a)):
+                self.union(email_father, a[1], a[ei])
         result = []
-        for em in email_cluster:
-            email_cluster[em].sort()
-            email_cluster[em].insert(0, email_user[em])
-            result.append(email_cluster[em])
+        email_cluster = {}
+        for a in accounts:
+            for ei in range(1, len(a)):
+                root = self.find_and_compress(email_father, a[ei])
+                if root not in email_cluster:
+                    email_cluster[root] = set()
+                email_cluster[root].add(a[ei])
+        for cl_e in email_cluster:
+            temp = []
+            temp.extend(email_cluster[cl_e])
+            temp.sort()
+            temp.insert(0, email_user[cl_e])
+            result.append(temp)
         return result
 
     def union(self, father: dict, node1: str, node2: str) -> None:
@@ -30,9 +33,6 @@ class Solution:
         root_b = self.find_and_compress(father, node2)
         if root_b != root_a:
             father[root_b] = root_a
-            for v in father:
-                if father[v] == root_b:
-                    father[v] = root_a
 
     def find_and_compress(self, father: dict, node_key: str) -> str:
         path = []

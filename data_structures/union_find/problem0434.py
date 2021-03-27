@@ -16,7 +16,7 @@ class Solution:
                 result.append(result[-1])
                 continue
             matrix[self.point_to_int(p.x, p.y, m)] = 1
-            father[self.point_to_int(p.x, p.y, m)] = self.point_to_int(p.x, p.y, m)
+            self.connect(father, self.point_to_int(p.x, p.y, m), self.point_to_int(p.x, p.y, m))
             temp = 1
             if len(result) > 0:
                 temp += result[-1]
@@ -34,7 +34,6 @@ class Solution:
 
     def connect(self, father: list, a_index: int, b_index: int) -> None:
         father[b_index] = a_index
-        self.find(father, b_index)
 
     def find(self, father: list, nodeIndex: int) -> int:
         path = []

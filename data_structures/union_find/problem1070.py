@@ -29,6 +29,7 @@ class Solution:
         return result
 
     def union(self, father: dict, node1: str, node2: str) -> None:
+        # 合并两个集合时，不需要立刻进行路经压缩。只有在查找时，才执行路经压缩。
         root_a = self.find_and_compress(father, node1)
         root_b = self.find_and_compress(father, node2)
         if root_b != root_a:

@@ -6,12 +6,14 @@ class Solution:
 
     def majorityNumber(self, nums: list) -> int:
         vote = 0
-        result = -1
+        result = nums[0]
         for num in nums:
-            if vote == 0:
-                result = num
             if result == num:
                 vote += 1
-            else:
-                vote -= 1
+                continue
+            if vote == 0:
+                result = num
+                vote = 1
+                continue
+            vote -= 1
         return result

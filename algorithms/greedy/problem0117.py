@@ -8,10 +8,10 @@ class Solution:
         result = 0
         start = 0
         while start < len(a) - 1:
-            next_start_choice = range(start + 1, start + a[start] + 1)
+            next_start_choices = range(start + 1, start + a[start] + 1)
             next_start = 0
             max_jump = 0
-            for ch in next_start_choice:
+            for ch in next_start_choices:
                 if len(a) - 1 == ch:
                     return result + 1
                 jump = ch + a[ch]

@@ -6,9 +6,9 @@ class Solution:
 
     def jump(self, a: list) -> int:
         result = 0
-        start = 0
-        while start < len(a) - 1:
-            next_start_choices = range(start + 1, start + a[start] + 1)
+        first_start = 0
+        while first_start < len(a) - 1:
+            next_start_choices = range(first_start + 1, first_start + a[first_start] + 1)
             next_start = 0
             max_jump = 0
             for ch in next_start_choices:
@@ -20,5 +20,5 @@ class Solution:
                 next_start = ch
                 max_jump = jump
             result += 1
-            start = next_start
+            first_start = next_start
         return result

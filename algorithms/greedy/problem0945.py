@@ -1,6 +1,6 @@
 class Solution:
 
-    # https://leetcode-cn.com/problems/task-scheduler/solution/tong-zi-by-popopop/
+    # Remember this: https://leetcode-cn.com/problems/task-scheduler/solution/tong-zi-by-popopop/
 
     def leastInterval(self, tasks: list, n: int) -> int:
         if n == 0:

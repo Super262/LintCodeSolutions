@@ -25,20 +25,18 @@ class Solution:
 
     def search(self, trie_root: dict, y: int, x: int) -> None:
         ch_ord = ord(self.board[y][x]) - ord('a')
-        if ch_ord not in trie_root[26]:
+        if not trie_root[ch_ord]:
             return
-        child_node = trie_root[26][ch_ord]
-        if child_node[27]:
-            self.results.append(self.words[child_node[28]])
-            child_node[27] = False
+        child_node = trie_root[ch_ord]
+        if child_node[26]:
+            self.results.append(self.words[child_node[27]])
+            child_node[26] = False
         prev_val = self.board[y][x]
         self.board[y][x] = "#"
         for d in self.directions:
             next_y = y + d[0]
             next_x = x + d[1]
             if next_y >= self.H or next_y < 0 or next_x >= self.W or next_x < 0 or self.board[next_y][next_x] == "#":
-                continue
-            if ord(self.board[next_y][next_x]) - ord('a') not in child_node[26]:
                 continue
             self.search(child_node, next_y, next_x)
         self.board[y][x] = prev_val
@@ -49,12 +47,15 @@ class Solution:
             cur_p = self.trie_root
             for ch in self.words[wi]:
                 ch_ord = ord(ch) - ord('a')
-                if ch_ord not in cur_p[26]:
-                    cur_p[26][ch_ord] = self.get_new_node()
-                cur_p = cur_p[26][ch_ord]
-            cur_p[27] = True
-            cur_p[28] = wi
+                if not cur_p[ch_ord]:
+                    cur_p[ch_ord] = self.get_new_node()
+                cur_p = cur_p[ch_ord]
+            cur_p[26] = True
+            cur_p[27] = wi
 
-    def get_new_node(self) -> dict:
+    def get_new_node(self) -> list:
         # 通过这个方法每次开辟新的内存保存节点信息
-        return {26: {}, 27: False, 28: -1}
+        node = [None] * 26
+        node.append(False)
+        node.append(-1)
+        return node

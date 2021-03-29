@@ -6,35 +6,33 @@ class Solution:
     """
 
     def wordSearchII(self, board: list, words: list) -> list:
-        results = set()
+        results = []
         if not board or not words:
-            return list(results)
-        visited = []
-        for y in range(len(board)):
-            visited.append([False] * len(board[y]))
+            return results
         trie_root = self.build_trie(words)
         for y in range(len(board)):
             for x in range(len(board[y])):
-                self.search(trie_root, board, visited, y, x, words, results)
-        return list(results)
+                self.search(trie_root, board, y, x, words, results)
+        return results
 
-    def search(self, trie_root: dict, board: list, visited: list, y: int, x: int, words: list, results: set) -> None:
-        visited[y][x] = True
+    def search(self, trie_root: dict, board: list, y: int, x: int, words: list, results: list) -> None:
         directions = [[-1, 0], [1, 0], [0, 1], [0, -1]]
         if board[y][x] not in trie_root["children"]:
-            visited[y][x] = False
             return
         child_node = trie_root["children"][board[y][x]]
         if child_node["isWord"]:
-            results.add(str(words[child_node["wordIndex"]]))
+            results.append(str(words[child_node["wordIndex"]]))
+            child_node["isWord"] = False
+        prev_val = board[y][x]
+        board[y][x] = "#"
         for d in directions:
             next_y = y + d[0]
             next_x = x + d[1]
-            if next_y >= len(board) or next_y < 0 or next_x >= len(board[next_y]) or next_x < 0 or visited[next_y][
-                next_x]:
+            if next_y >= len(board) or next_y < 0 or next_x >= len(board[next_y]) or next_x < 0 or board[next_y][
+                next_x] == "#":
                 continue
-            self.search(child_node, board, visited, next_y, next_x, words, results)
-        visited[y][x] = False
+            self.search(child_node, board, next_y, next_x, words, results)
+        board[y][x] = prev_val
 
     def build_trie(self, words: list) -> dict:
         trie_root = self.get_new_node()

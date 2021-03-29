@@ -38,6 +38,8 @@ class Solution:
             next_x = x + d[1]
             if next_y >= self.H or next_y < 0 or next_x >= self.W or next_x < 0 or self.board[next_y][next_x] == "#":
                 continue
+            if ord(self.board[next_y][next_x]) - ord('a') not in child_node[26]:
+                continue
             self.search(child_node, next_y, next_x)
         self.board[y][x] = prev_val
 

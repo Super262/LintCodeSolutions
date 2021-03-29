@@ -25,10 +25,10 @@ class WordDictionary:
     """
 
     def search(self, word: str) -> bool:
-        return self.find(word, 0)
+        return self.find(word, 0, len(word) - 1)
 
-    def find(self, word: str, start_index: int) -> bool:
-        if start_index == len(word) - 1:
+    def find(self, word: str, start_index: int, end_index: int) -> bool:
+        if start_index == end_index:
             if word[start_index] == ".":
                 for ch in self.sons:
                     if self.sons[ch].is_word:
@@ -38,10 +38,10 @@ class WordDictionary:
         else:
             if word[start_index] == ".":
                 for ch in self.sons:
-                    if self.sons[ch].find(word, start_index + 1):
+                    if self.sons[ch].find(word, start_index + 1, end_index):
                         return True
             else:
                 if word[start_index] not in self.sons:
                     return False
-                return self.sons[word[start_index]].find(word, start_index + 1)
+                return self.sons[word[start_index]].find(word, start_index + 1, end_index)
         return False

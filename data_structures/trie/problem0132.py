@@ -24,12 +24,13 @@ class Solution:
         return self.results
 
     def search(self, trie_root: dict, y: int, x: int) -> None:
-        if self.board[y][x] not in trie_root["*"]:
+        ch_ord = ord(self.board[y][x]) - ord('a')
+        if ch_ord not in trie_root[26]:
             return
-        child_node = trie_root["*"][self.board[y][x]]
-        if child_node["$"]:
-            self.results.append(str(self.words[child_node["%"]]))
-            child_node["$"] = False
+        child_node = trie_root[26][ch_ord]
+        if child_node[27]:
+            self.results.append(self.words[child_node[28]])
+            child_node[27] = False
         prev_val = self.board[y][x]
         self.board[y][x] = "#"
         for d in self.directions:
@@ -45,12 +46,13 @@ class Solution:
         for wi in range(len(self.words)):
             cur_p = self.trie_root
             for ch in self.words[wi]:
-                if ch not in cur_p["*"]:
-                    cur_p["*"][ch] = self.get_new_node()
-                cur_p = cur_p["*"][ch]
-            cur_p["$"] = True
-            cur_p["%"] = wi
+                ch_ord = ord(ch) - ord('a')
+                if ch_ord not in cur_p[26]:
+                    cur_p[26][ch_ord] = self.get_new_node()
+                cur_p = cur_p[26][ch_ord]
+            cur_p[27] = True
+            cur_p[28] = wi
 
     def get_new_node(self) -> dict:
         # 通过这个方法每次开辟新的内存保存节点信息
-        return {"*": {}, "%": -1, "$": False}
+        return {26: {}, 27: False, 28: -1}

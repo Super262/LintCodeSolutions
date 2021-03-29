@@ -24,12 +24,12 @@ class Solution:
         return self.results
 
     def search(self, trie_root: dict, y: int, x: int) -> None:
-        if self.board[y][x] not in trie_root["children"]:
+        if self.board[y][x] not in trie_root["*"]:
             return
-        child_node = trie_root["children"][self.board[y][x]]
-        if child_node["isWord"]:
-            self.results.append(str(self.words[child_node["wordIndex"]]))
-            child_node["isWord"] = False
+        child_node = trie_root["*"][self.board[y][x]]
+        if child_node["$"]:
+            self.results.append(str(self.words[child_node["%"]]))
+            child_node["$"] = False
         prev_val = self.board[y][x]
         self.board[y][x] = "#"
         for d in self.directions:
@@ -45,12 +45,12 @@ class Solution:
         for wi in range(len(self.words)):
             cur_p = self.trie_root
             for ch in self.words[wi]:
-                if ch not in cur_p["children"]:
-                    cur_p["children"][ch] = self.get_new_node()
-                cur_p = cur_p["children"][ch]
-            cur_p["isWord"] = True
-            cur_p["wordIndex"] = wi
+                if ch not in cur_p["*"]:
+                    cur_p["*"][ch] = self.get_new_node()
+                cur_p = cur_p["*"][ch]
+            cur_p["$"] = True
+            cur_p["%"] = wi
 
     def get_new_node(self) -> dict:
         # 通过这个方法每次开辟新的内存保存节点信息
-        return {"children": {}, "wordIndex": -1, "isWord": False}
+        return {"*": {}, "%": -1, "$": False}

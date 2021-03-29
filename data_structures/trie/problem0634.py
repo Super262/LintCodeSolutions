@@ -12,7 +12,7 @@ class Solution:
             self.backtracking(1, [w], results)
         return results
 
-    def buildTrie(self, words) -> None:
+    def buildTrie(self, words: list) -> None:
         self.trie = {"#": []}
         for wi in range(len(words)):
             p = self.trie

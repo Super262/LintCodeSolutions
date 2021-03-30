@@ -29,7 +29,7 @@ class DualHeap:
             heapq.heappop(heap)
 
     # 调整 small 和 large 中的元素个数，使得二者的元素个数满足要求
-    def makeBalance(self) -> None:
+    def make_balance(self) -> None:
         import heapq
         if self.smallSize > self.largeSize + 1:
             # small 比 large 元素多 2 个
@@ -56,7 +56,7 @@ class DualHeap:
         else:
             heapq.heappush(self.large, num)
             self.largeSize += 1
-        self.makeBalance()
+        self.make_balance()
 
     def erase(self, num: int) -> None:
         if num not in self.delayed:
@@ -68,9 +68,9 @@ class DualHeap:
         else:
             self.largeSize -= 1
             self.prune(self.large)
-        self.makeBalance()
+        self.make_balance()
 
-    def getMedian(self) -> int:
+    def get_median(self) -> int:
         return -self.small[0]
 
 
@@ -81,9 +81,9 @@ class Solution:
         dh = DualHeap(k)
         for num in nums[:k]:
             dh.insert(num)
-        ans = [dh.getMedian()]
+        ans = [dh.get_median()]
         for i in range(k, len(nums)):
             dh.insert(nums[i])
             dh.erase(nums[i - k])
-            ans.append(dh.getMedian())
+            ans.append(dh.get_median())
         return ans

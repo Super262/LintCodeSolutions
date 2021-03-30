@@ -4,12 +4,13 @@ class DualHeap:
     def __init__(self, k: int) -> None:
         # 大根堆，维护较小的一半元素，注意 python 没有大根堆，需要将所有元素取相反数并使用小根堆
         self.small = list()
+
         # 小根堆，维护较大的一半元素
         self.large = list()
+
         # 哈希表，记录「延迟删除」的元素，key 为元素，value 为需要删除的次数
         self.delayed = {}
 
-        self.k = k
         # small 和 large 当前包含的元素个数，需要扣除被「延迟删除」的元素
         self.smallSize = 0
         self.largeSize = 0

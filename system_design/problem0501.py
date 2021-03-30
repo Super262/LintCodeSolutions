@@ -68,7 +68,7 @@ class MiniTwitter:
     def follow(self, from_user_id, to_user_id):
         if from_user_id not in self.friends:
             self.friends[from_user_id] = set()
-        self.friends[from_user_id].add(to_user_id)
+        self.friends[from_user_id].push(to_user_id)
 
     """
     @param: from_user_id: An integer

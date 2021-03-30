@@ -39,8 +39,8 @@ class FriendshipService:
             self.followers[to_user_id] = set()
         if from_user_id not in self.followings:
             self.followings[from_user_id] = set()
-        self.followers[to_user_id].add(from_user_id)
-        self.followings[from_user_id].add(to_user_id)
+        self.followers[to_user_id].push(from_user_id)
+        self.followings[from_user_id].push(to_user_id)
 
     """
     @param: from_user_id: An integer

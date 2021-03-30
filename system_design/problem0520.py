@@ -25,7 +25,7 @@ class Solution:
         while len(parts_ids) < self.k:
             next_id = random.randrange(0, self.n)
             if next_id not in self.used_ids:
-                self.used_ids.add(next_id)
+                self.used_ids.push(next_id)
                 parts_ids.append(next_id)
         parts_ids.sort()
         self.machines[machine_id] = parts_ids

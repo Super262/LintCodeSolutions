@@ -1,7 +1,7 @@
 # https://leetcode-cn.com/problems/sliding-window-median/solution/hua-dong-chuang-kou-zhong-wei-shu-by-lee-7ai6/
 
 class DualHeap:
-    def __init__(self, k: int):
+    def __init__(self, k: int) -> None:
         # 大根堆，维护较小的一半元素，注意 python 没有大根堆，需要将所有元素取相反数并使用小根堆
         self.small = list()
         # 小根堆，维护较大的一半元素
@@ -15,7 +15,7 @@ class DualHeap:
         self.largeSize = 0
 
     # 不断地弹出 heap 的堆顶元素，并且更新哈希表
-    def prune(self, heap: list):
+    def prune(self, heap: list) -> None:
         import heapq
         while heap:
             num = heap[0]
@@ -29,7 +29,7 @@ class DualHeap:
             heapq.heappop(heap)
 
     # 调整 small 和 large 中的元素个数，使得二者的元素个数满足要求
-    def makeBalance(self):
+    def makeBalance(self) -> None:
         import heapq
         if self.smallSize > self.largeSize + 1:
             # small 比 large 元素多 2 个
@@ -48,7 +48,7 @@ class DualHeap:
             # large 堆顶元素被移除，需要进行 prune
             self.prune(self.large)
 
-    def insert(self, num: int):
+    def insert(self, num: int) -> None:
         import heapq
         if not self.small or num <= -self.small[0]:
             heapq.heappush(self.small, -num)
@@ -58,7 +58,7 @@ class DualHeap:
             self.largeSize += 1
         self.makeBalance()
 
-    def erase(self, num: int):
+    def erase(self, num: int) -> None:
         if num not in self.delayed:
             self.delayed[num] = 0
         self.delayed[num] += 1

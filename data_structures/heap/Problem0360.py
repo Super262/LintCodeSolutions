@@ -64,12 +64,10 @@ class DualHeap:
         self.delayed[num] += 1
         if num <= -self.small[0]:
             self.smallSize -= 1
-            if num == -self.small[0]:
-                self.prune(self.small)
+            self.prune(self.small)
         else:
             self.largeSize -= 1
-            if num == self.large[0]:
-                self.prune(self.large)
+            self.prune(self.large)
         self.makeBalance()
 
     def getMedian(self) -> int:

@@ -33,16 +33,14 @@ class DualHeap:
         import heapq
         if self.smallSize > self.largeSize + 1:
             # small 比 large 元素多 2 个
-            heapq.heappush(self.large, -self.small[0])
-            heapq.heappop(self.small)
+            heapq.heappush(self.large, -heapq.heappop(self.small))
             self.smallSize -= 1
             self.largeSize += 1
             # small 堆顶元素被移除，需要进行 prune
             self.prune(self.small)
         elif self.smallSize < self.largeSize:
             # large 比 small 元素多 1 个
-            heapq.heappush(self.small, -self.large[0])
-            heapq.heappop(self.large)
+            heapq.heappush(self.small, -heapq.heappop(self.large))
             self.smallSize += 1
             self.largeSize -= 1
             # large 堆顶元素被移除，需要进行 prune

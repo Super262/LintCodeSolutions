@@ -24,9 +24,10 @@ class DualHeap:
                 num = -num
             if num not in self.delayed:
                 return
-            self.delayed[num] -= 1
-            if self.delayed[num] == 0:
+            if self.delayed[num] == 1:
                 self.delayed.pop(num)
+            else:
+                self.delayed[num] -= 1
             heapq.heappop(heap)
 
     # 调整 small 和 large 中的元素个数，使得二者的元素个数满足要求

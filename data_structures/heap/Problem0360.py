@@ -23,7 +23,7 @@ class DualHeap:
             if heap is self.small:
                 num = -num
             if num not in self.delayed:
-                break
+                return
             self.delayed[num] -= 1
             if self.delayed[num] == 0:
                 self.delayed.pop(num)

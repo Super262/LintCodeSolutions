@@ -21,13 +21,12 @@ class DualHeap:
             num = heap[0]
             if heap is self.small:
                 num = -num
-            if num in self.delayed:
-                self.delayed[num] -= 1
-                if self.delayed[num] == 0:
-                    self.delayed.pop(num)
-                heapq.heappop(heap)
-            else:
+            if num not in self.delayed:
                 break
+            self.delayed[num] -= 1
+            if self.delayed[num] == 0:
+                self.delayed.pop(num)
+            heapq.heappop(heap)
 
     # 调整 small 和 large 中的元素个数，使得二者的元素个数满足要求
     def makeBalance(self):

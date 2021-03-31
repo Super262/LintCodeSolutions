@@ -6,7 +6,7 @@ class FriendshipService:
 
     """
     @param: user_id: An integer
-    @return: all followers and sort by user_id
+    @return: all followers and sorting by user_id
     """
 
     def getFollowers(self, user_id: int) -> list:
@@ -18,7 +18,7 @@ class FriendshipService:
 
     """
     @param: user_id: An integer
-    @return: all followings and sort by user_id
+    @return: all followings and sorting by user_id
     """
 
     def getFollowings(self, user_id: int) -> list:

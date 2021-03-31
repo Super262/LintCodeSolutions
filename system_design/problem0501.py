@@ -30,7 +30,7 @@ class MiniTwitter:
 
     """
     @param: user_id: An integer
-    @return: a list of 10 new feeds recently and sort by timeline
+    @return: a list of 10 new feeds recently and sorting by timeline
     """
 
     def getNewsFeed(self, user_id):
@@ -50,7 +50,7 @@ class MiniTwitter:
 
     """
     @param: user_id: An integer
-    @return: a list of 10 new posts recently and sort by timeline
+    @return: a list of 10 new posts recently and sorting by timeline
     """
 
     def getTimeline(self, user_id):

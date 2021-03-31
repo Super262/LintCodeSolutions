@@ -5,6 +5,9 @@ class Solution:
     """
 
     def numIslands(self, grid: list) -> int:
+
+        #   Using DFS may make the stack overflow!
+
         if not grid or not grid[0]:
             return 0
         h = len(grid)

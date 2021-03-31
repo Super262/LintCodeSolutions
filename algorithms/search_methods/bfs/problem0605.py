@@ -7,6 +7,7 @@ class Solution:
 
     # 队列中一直只包含1个元素时，拓扑序是唯一的
     def sequenceReconstruction(self, org: list, seqs: list) -> bool:
+        # 有效的拓扑排序：结果长度等于节点个数
         if not org and (not seqs or not seqs[0]):
             return True
         if not seqs or not seqs[0]:
@@ -48,4 +49,4 @@ class Solution:
                 in_degree[n] -= 1
                 if in_degree[n] == 0:
                     q.append(n)
-        return order == org
+        return len(order) == len(in_degree) and order == org

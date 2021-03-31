@@ -18,9 +18,7 @@ class Solution:
                 in_degree[n] -= 1
                 if in_degree[n] == 0:
                     q.append(n)
-        if len(order) == numCourses:
-            return True
-        return False
+        return len(order) == numCourses
 
     def get_in_degree_and_neighbors(self, graph: list, n: int) -> tuple:
         in_degree = {v: 0 for v in range(n)}

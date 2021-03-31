@@ -26,9 +26,8 @@ class Solution:
 
     def get_next_words(self, word: str) -> list:
         words = []
-        chars = list(word)
         dict = "abcdefghijklmnopqrstuvwxyz"
-        for i in range(len(chars)):
+        for i in range(len(word)):
             for ch in dict:
                 if word[i] == ch:
                     continue

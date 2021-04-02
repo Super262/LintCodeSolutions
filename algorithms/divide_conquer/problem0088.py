@@ -5,7 +5,6 @@ class TreeNode:
 
 
 class Solution:
-    # 题解：递归查找A和B， 找到A和B第一次在同一棵子树中的子树根节点即是LCA。
     """
     @param: root: The root of the binary search tree.
     @param: A: A TreeNode in a Binary.
@@ -16,14 +15,26 @@ class Solution:
     def lowestCommonAncestor(self, root: TreeNode, a: TreeNode, b: TreeNode):
         if not root or not a or not b:
             return None
-        if root == a or root == b:
-            return root
-        left_result = self.lowestCommonAncestor(root.left, a, b)
-        right_result = self.lowestCommonAncestor(root.right, a, b)
-        if left_result and right_result:
-            return root
-        if left_result:
-            return left_result
-        if right_result:
-            return right_result
-        return None
+        path_a = []
+        if not self.find_path(root, a, path_a):
+            return None
+        path_b = []
+        if not self.find_path(root, b, path_b):
+            return None
+        i = 1
+        while i < len(path_a) and i < len(path_b):
+            if path_a[i] != path_b[i]:
+                break
+            i += 1
+        return path_a[i - 1]
+
+    def find_path(self, root: TreeNode, target: TreeNode, path: list) -> bool:
+        if not root or not target:
+            return False
+        path.append(root)
+        if root == target:
+            return True
+        if self.find_path(root.left, target, path) or self.find_path(root.right, target, path):
+            return True
+        path.pop()
+        return False

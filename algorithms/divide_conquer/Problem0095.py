@@ -17,6 +17,6 @@ class Solution:
     def helper(self, root: TreeNode, lower_bound: int, upper_bound: int) -> bool:
         if not root:
             return True
-        if root and (root.val <= lower_bound or root.val >= upper_bound):
+        if root.val <= lower_bound or root.val >= upper_bound:
             return False
         return self.helper(root.left, lower_bound, root.val) and self.helper(root.right, root.val, upper_bound)

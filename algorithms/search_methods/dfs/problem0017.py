@@ -6,8 +6,8 @@ class Solution:
 
     def subsets(self, nums: list) -> list:
         results = []
-        nums_copy = sorted(nums)
-        self.helper(nums_copy, 0, [], results)
+        nums_copied = sorted(nums)
+        self.helper(nums_copied, 0, [], results)
         return results
 
     def helper(self, nums: list, index: int, subset: list, results: list) -> None:

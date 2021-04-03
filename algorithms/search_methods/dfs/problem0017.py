@@ -11,10 +11,8 @@ class Solution:
         return results
 
     def helper(self, nums: list, index: int, subset: list, results: list) -> None:
-        if index >= len(nums):
-            results.append(list(subset))
-            return
-        subset.append(nums[index])
-        self.helper(nums, index + 1, subset, results)
-        subset.pop()
-        self.helper(nums, index + 1, subset, results)
+        results.append(list(subset))
+        for i in range(index, len(nums)):
+            subset.append(nums[i])
+            self.helper(nums, i + 1, subset, results)
+            subset.pop()

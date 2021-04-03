@@ -29,5 +29,5 @@ class Solution:
             else:
                 cur_node = stack.pop()
                 while stack and stack[-1].right == cur_node:
-                    cur_node = stack.pop()
+                    cur_node = stack.pop()  # 弹出比自己小的（失效的）节点
         return stack[-1].val

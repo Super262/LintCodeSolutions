@@ -13,10 +13,9 @@ class Solution:
 
     def insertNode(self, root: TreeNode, node: TreeNode) -> TreeNode:
         if not root:
-            root = node
-            return root
+            return node
         cur_node = root
-        while cur_node:
+        while True:
             if cur_node.val == node.val:
                 break
             if cur_node.val > node.val:

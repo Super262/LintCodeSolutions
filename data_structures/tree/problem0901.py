@@ -23,15 +23,20 @@ class Solution:
         else:
             self.move_upper(upper_stack)
         for _ in range(k):
-            if len(lower_stack) == 0 or (len(upper_stack) > 0 and
-                                         abs(float(lower_stack[-1].val) - target) > abs(
-                        float(upper_stack[-1].val - target))):
-                result.append(upper_stack[-1].val)
-                self.move_upper(upper_stack)
-            else:
+            if self.is_lower_closer(lower_stack, upper_stack, target):
                 result.append(lower_stack[-1].val)
                 self.move_lower(lower_stack)
+            else:
+                result.append(upper_stack[-1].val)
+                self.move_upper(upper_stack)
         return result
+
+    def is_lower_closer(self, lower_stack: list, upper_stack: list, target: float):
+        if not lower_stack:
+            return False
+        if not upper_stack:
+            return True
+        return abs(float(lower_stack[-1].val) - target) < abs(float(upper_stack[-1].val - target))
 
     def initialize_stack(self, root: TreeNode, target: float) -> list:
         stack = []

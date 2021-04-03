@@ -20,9 +20,9 @@ class Solution:
             stack.append(cur_node)
             cur_node = cur_node.left
         for _ in range(k - 1):
-            node = stack[-1]
-            if node.right:
-                cur_node = node.right
+            cur_node = stack[-1]
+            if cur_node.right:
+                cur_node = cur_node.right
                 while cur_node:
                     stack.append(cur_node)
                     cur_node = cur_node.left

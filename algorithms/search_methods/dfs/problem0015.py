@@ -6,18 +6,19 @@ class Solution:
 
     def permute(self, nums: list) -> list:
         results = []
-        self.dfs(nums, set(), [], results)
+        visited = [False] * len(nums)
+        self.dfs(nums, visited, [], results)
         return results
 
-    def dfs(self, nums: list, visited: set, permutation: list, results: list):
+    def dfs(self, nums: list, visited: list, permutation: list, results: list):
         if len(permutation) == len(nums):
             results.append(list(permutation))
             return
-        for n in nums:
-            if n in visited:
+        for i in range(len(nums)):
+            if visited[i]:
                 continue
-            visited.add(n)
-            permutation.append(n)
+            visited[i] = True
+            permutation.append(nums[i])
             self.dfs(nums, visited, permutation, results)
             permutation.pop()
-            visited.remove(n)
+            visited[i] = False

@@ -26,6 +26,6 @@ class Solution:
         import sys
         graph = [[sys.maxsize] * (n + 1) for _ in range(n + 1)]
         for start, end, distance in roads:
-            graph[start][end] = min(graph[start][end], distance) # end -> start 和 start -> end 要设置为一样的长度
+            graph[start][end] = min(graph[start][end], distance)  # end -> start 和 start -> end 要设置为一样的长度
             graph[end][start] = min(graph[end][start], distance)
         return graph

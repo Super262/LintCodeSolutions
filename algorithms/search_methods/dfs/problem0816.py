@@ -12,7 +12,7 @@ class Solution:
         f = [[sys.maxsize] * (n + 1) for _ in range(state_size)]
         f[1][1] = 0
         for cur_state in range(state_size):
-            for i in range(2, n + 1):
+            for i in range(2, n + 1):   # 注意：i >= 2
                 if cur_state & (1 << (i - 1)) == 0:
                     continue
                 prev_state = cur_state ^ (1 << (i - 1))

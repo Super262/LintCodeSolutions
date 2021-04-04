@@ -5,7 +5,7 @@ class Solution:
     """
 
     def siftup(self, A, k):
-        while k != 0:
+        while k > 0:
             father = (k - 1) // 2
             if A[k] > A[father]:
                 break

@@ -1,61 +1,72 @@
 class Solution:
+    """
+    @param board: A list of lists of character
+    @param words: A list of string
+    @return: A list of string
+    """
 
-    def __init__(self):
-        self.trie_root = None
-        self.results = []
-        self.board = None
-        self.words = None
-        self.H = -1
-        self.W = -1
-        self.directions = []
+    class Trie:
+        def __init__(self):
+            self.is_word = False
+            self.word_value = ""
+            self.children = {}
 
     def wordSearchII(self, board: list, words: list) -> list:
-        if not board or not words:
-            return self.results
-        self.board = board
-        self.words = words
-        self.H = len(self.board)
-        self.W = len(self.board[0])
-        self.directions = [(-1, 0), (1, 0), (0, 1), (0, -1)]
-        self.build_trie()
-        for y in range(self.H):
-            for x in range(self.W):
-                self.search(self.trie_root, y, x)
-        return self.results
+        root = self.build_trie(words)
+        results = []
+        visited = []
+        for _ in range(len(board)):
+            visited.append([False] * len(board[0]))
+        directions = ((0, 1), (0, -1), (1, 0), (-1, 0))
+        for y in range(len(board)):
+            for x in range(len(board[0])):
+                ch_ord = ord(board[y][x]) - ord("a")
+                if ch_ord not in root.children:
+                    continue
+                visited[y][x] = True
+                self.dfs_get_results_and_prune(root.children[ch_ord], board, visited, y, x, directions, results)
+                visited[y][x] = False
+        return results
 
-    def search(self, trie_root: dict, y: int, x: int) -> None:
-        ch_ord = ord(self.board[y][x]) - ord('a')
-        if not trie_root[ch_ord]:
-            return
-        child_node = trie_root[ch_ord]
-        if child_node[26]:
-            self.results.append(self.words[child_node[27]])
-            child_node[26] = False
-        prev_val = self.board[y][x]
-        self.board[y][x] = "#"
-        for d in self.directions:
-            next_y = y + d[0]
-            next_x = x + d[1]
-            if next_y >= self.H or next_y < 0 or next_x >= self.W or next_x < 0 or self.board[next_y][next_x] == "#":
+    def dfs_get_results_and_prune(self, root: Trie, board: list, visited: list, start_y: int, start_x: int,
+                                  directions: tuple, results: list) -> bool:
+        # 找到单词并删除叶节点，提速20倍！
+        if root.is_word:
+            results.append(root.word_value)
+            root.is_word = False
+            if not root.children:
+                return True
+        for d in directions:
+            next_y = start_y + d[0]
+            next_x = start_x + d[1]
+            if next_y < 0 or next_y >= len(board) or next_x < 0 or next_x >= len(board[0]) or visited[next_y][next_x]:
                 continue
-            self.search(child_node, next_y, next_x)
-        self.board[y][x] = prev_val
+            ch_ord = ord(board[next_y][next_x]) - ord("a")
+            if ch_ord not in root.children:
+                continue
+            visited[next_y][next_x] = True
+            if self.dfs_get_results_and_prune(root.children[ch_ord], board, visited, next_y, next_x, directions,
+                                              results):
+                root.children.pop(ch_ord)
+            visited[next_y][next_x] = False
+        return len(root.children) == 0
 
-    def build_trie(self) -> None:
-        self.trie_root = self.get_new_node()
-        for wi in range(len(self.words)):
-            cur_p = self.trie_root
-            for ch in self.words[wi]:
-                ch_ord = ord(ch) - ord('a')
-                if not cur_p[ch_ord]:
-                    cur_p[ch_ord] = self.get_new_node()
-                cur_p = cur_p[ch_ord]
-            cur_p[26] = True
-            cur_p[27] = wi
+    def build_trie(self, words: list) -> Trie:
+        root = self.Trie()
+        if not words:
+            return root
+        for w in words:
+            self.add_word(root, w)
+        return root
 
-    def get_new_node(self) -> list:
-        # 通过这个方法每次开辟新的内存保存节点信息
-        node = [None] * 26
-        node.append(False)
-        node.append(-1)
-        return node
+    def add_word(self, root: Trie, word: str) -> None:
+        if not root or not word:
+            return
+        cur_node = root
+        for ch in word:
+            ch_ord = ord(ch) - ord("a")
+            if ch_ord not in cur_node.children:
+                cur_node.children[ch_ord] = self.Trie()
+            cur_node = cur_node.children[ch_ord]
+        cur_node.is_word = True
+        cur_node.word_value = word

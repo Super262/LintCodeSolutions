@@ -12,15 +12,15 @@ class Solution:
         self.dfs(candidates_unique, 0, target, [], results)
         return results
 
-    def dfs(self, candidates: list, start_index: int, target: int, permutation: list, results: list) -> None:
+    def dfs(self, candidates: list, start_index: int, target: int, combination: list, results: list) -> None:
         if target < 0:
             return
         if target == 0:
-            results.append(list(permutation))
+            results.append(list(combination))
             return
         for i in range(start_index, len(candidates)):
             if candidates[i] > target:
                 return
-            permutation.append(candidates[i])
-            self.dfs(candidates, i, target - candidates[i], permutation, results)
-            permutation.pop()
+            combination.append(candidates[i])
+            self.dfs(candidates, i, target - candidates[i], combination, results)
+            combination.pop()

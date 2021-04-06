@@ -9,9 +9,11 @@ class Solution:
         word_groups = {}
         for s in strs:
             s_sorted = self.count_and_sort(s)
-            if s_sorted not in word_groups:
-                word_groups[s_sorted] = []
-            word_groups[s_sorted].append(s)
+            current_group = word_groups.get(s_sorted, None)
+            if not current_group:
+                current_group = []
+                word_groups[s_sorted] = current_group
+            current_group.append(s)
         for key in word_groups:
             if len(word_groups[key]) < 2:
                 continue

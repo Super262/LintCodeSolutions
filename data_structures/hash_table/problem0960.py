@@ -1,13 +1,13 @@
 class DataStream:
-    class Node:
+    class DLinkedNode:
         def __init__(self, value: int) -> None:
             self.next = None
             self.prev = None
             self.value = value
 
     def __init__(self):
-        self.head = self.Node(-1)
-        self.tail = self.Node(-1)
+        self.head = self.DLinkedNode(-1)
+        self.tail = self.DLinkedNode(-1)
         self.head.next = self.tail
         self.tail.prev = self.head
         self.num_to_node = {}
@@ -27,7 +27,7 @@ class DataStream:
             self.duplicated_nums.add(num)
             self.num_to_node.pop(num)
         else:
-            current_node = self.Node(num)
+            current_node = self.DLinkedNode(num)
             self.push_back(current_node)
             self.num_to_node[num] = current_node
 
@@ -38,13 +38,13 @@ class DataStream:
     def firstUnique(self) -> int:
         return self.head.next.value
 
-    def remove_node(self, current_node: Node) -> None:
+    def remove_node(self, current_node: DLinkedNode) -> None:
         current_node.prev.next = current_node.next
         current_node.next.prev = current_node.prev
         current_node.next = None
         current_node.prev = None
 
-    def push_back(self, current_node: Node) -> None:
+    def push_back(self, current_node: DLinkedNode) -> None:
         current_node.prev = self.tail.prev
         current_node.next = self.tail
         current_node.prev.next = current_node

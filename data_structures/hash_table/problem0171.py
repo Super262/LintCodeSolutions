@@ -8,7 +8,7 @@ class Solution:
         results = []
         word_groups = {}
         for s in strs:
-            s_sorted = "".join(sorted(s))
+            s_sorted = self.count_and_sort(s)
             if s_sorted not in word_groups:
                 word_groups[s_sorted] = []
             word_groups[s_sorted].append(s)
@@ -17,3 +17,15 @@ class Solution:
                 continue
             results.extend(word_groups[key])
         return results
+
+    def count_and_sort(self, s: str) -> str:
+        if not s:
+            return ""
+        char_table = [0] * 26
+        for ch in s:
+            char_table[ord(ch) - ord("a")] += 1
+        result = []
+        for ch_ord in range(len(char_table)):
+            for _ in range(char_table[ch_ord]):
+                result.append(chr(ch_ord + ord("a")))
+        return "".join(result)

@@ -5,15 +5,13 @@ class Solution:
     """
 
     def minimumTotal(self, triangle: list) -> int:
-        memo = dict()
-        return self.dp_get_minimal(triangle, 0, 0, memo)
-
-    def dp_get_minimal(self, triangle: list, y: int, x: int, memo: dict) -> int:
-        if y == len(triangle):
+        if not triangle:
             return 0
-        if (y, x) in memo:
-            return memo[(y, x)]
-        current_sum = triangle[y][x] + min(self.dp_get_minimal(triangle, y + 1, x, memo),
-                                           self.dp_get_minimal(triangle, y + 1, x + 1, memo))
-        memo[(y, x)] = current_sum
-        return current_sum
+        n = len(triangle)
+        dp = [[0] * i for i in range(1, n + 1)]
+        for i in range(n):
+            dp[n - 1][i] = triangle[n - 1][i]
+        for i in range(n - 2, -1, -1):
+            for j in range(i + 1):
+                dp[i][j] = min(dp[i + 1][j], dp[i + 1][j + 1]) + triangle[i][j]
+        return dp[0][0]

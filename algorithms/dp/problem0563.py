@@ -11,7 +11,7 @@ class Solution:
         dp[0] = 1
         for i in range(1, n + 1):
             for j in range(m, -1, -1):  # 对于求和运算，第1个有效值是0。因此，子集的和j从0开始计算，而不是1！
-                if nums[i - 1] > j:
-                    continue
+                if j < nums[i - 1]:
+                    break
                 dp[j] = dp[j] + dp[j - nums[i - 1]]
         return dp[m]

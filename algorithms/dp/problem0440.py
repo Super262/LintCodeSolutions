@@ -16,3 +16,16 @@ class Solution:
                 else:
                     dp[i][j] = dp[i - 1][j]
         return dp[n][m]
+
+# 优化后的多重背包
+# class Solution:
+#
+#     def backPackIII(self, A, V, m):
+#         n = len(A)
+#         dp = [0] * (m + 1)
+#
+#         for i in range(n):
+#             for j in range(A[i], m + 1):
+#                 dp[j] = max(dp[j], dp[j - A[i]] + V[i])
+#
+#         return dp[m]

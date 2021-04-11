@@ -7,7 +7,7 @@ class Solution:
     def numDecodings(self, s: str) -> int:
         n = len(s)
         if n == 0:
-            return 0
+            return 1
         f = [0] * (n + 1)
         f[0] = 1
         if s[0] != "0":

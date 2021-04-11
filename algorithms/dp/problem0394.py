@@ -5,9 +5,14 @@ class Solution:
     """
 
     def firstWillWin(self, n: int) -> bool:
-        dp = [False] * (n + 1)
+        f0 = False
+        f1 = False
+        f2 = False
         if n > 0:
-            dp[1] = True
+            f1 = True
         for i in range(2, n + 1):
-            dp[i] = not dp[i - 1] or not dp[i - 2]
-        return dp[n]
+            f2 = not f1 or not f0
+            f0 = f1
+            f1 = f2
+            f2 = False
+        return f1

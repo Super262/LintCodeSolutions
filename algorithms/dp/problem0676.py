@@ -9,13 +9,14 @@ class Solution:
             return 1
         n = len(s)
         max_bound = 1000000007
-        dp = [0] * (n + 1)
-        dp[0] = 1
-        dp[1] = self.count_one(s, 0) * dp[0]
+        f0 = 1
+        f1 = self.count_one(s, 0) * f0
         for i in range(2, n + 1):
-            dp[i] = self.count_one(s, i - 1) * dp[i - 1] % max_bound + self.count_two(s, i - 2) * dp[i - 2] % max_bound
-            dp[i] %= max_bound
-        return dp[n]
+            f2 = self.count_one(s, i - 1) * f1 % max_bound + self.count_two(s, i - 2) * f0 % max_bound
+            f2 %= max_bound
+            f0 = f1
+            f1 = f2
+        return f1
 
     def count_one(self, s: str, start: int) -> int:
         if s[start] == "*":

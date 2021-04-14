@@ -9,7 +9,8 @@ class Solution:
         if not nums:
             return
         n = len(nums)
-        smaller_median = self.partition_by_smaller_median(nums, 0, n - 1, n // 2)
+        # 选取中位数或者中位数左侧较小的元素相当于选取第(nums.length - 1) / 2 + 1个元素（从1开始计数）
+        smaller_median = self.partition_by_smaller_median(nums, 0, n - 1, (n - 1) // 2 + 1)
         answer = [smaller_median] * n
         left = 1
         if n % 2 == 0:

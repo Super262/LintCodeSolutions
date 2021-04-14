@@ -4,16 +4,20 @@ class Vector2D(object):
     def __init__(self, vec2d):
         self.vec2d = vec2d
         self.current_row = 0
-        self.current_col = -1
+        self.current_col = 0
 
     # @return {int} a next element
     def next(self) -> int:
-        return self.vec2d[self.current_row][self.current_col]
+        import sys
+        result = -sys.maxsize
+        if self.hasNext():
+            result = self.vec2d[self.current_row][self.current_col]
+            self.current_col += 1
+        return result
 
     # @return {boolean} true if it has next element
     # or false
     def hasNext(self) -> bool:
-        self.current_col += 1
         while self.current_row < len(self.vec2d) and self.current_col >= len(self.vec2d[self.current_row]):
             self.current_col = 0
             self.current_row += 1

@@ -7,7 +7,7 @@ class Solution:
     """
 
     def minArea(self, image: list, x: int, y: int) -> int:
-        if not image or not image[0]:
+        if not image or not image[0] or image[x][y] == '0':
             return 0
         up = self.find_first(image, 0, x, True)
         down = self.find_last(image, x, len(image) - 1, True)

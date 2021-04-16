@@ -13,6 +13,7 @@ class Solution:
         max_freq = 0
         right = 0
         for left in range(len(s)):
+            right = max(right, left)
             while right < len(s) and right - left - max_freq <= k:
                 counter[s[right]] = counter.get(s[right], 0) + 1
                 max_freq = max(max_freq, counter[s[right]])

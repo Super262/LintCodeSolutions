@@ -6,12 +6,11 @@ class Solution:
     @return: An integer
     """
 
-    # 迭代法会超时，暂时不知道为什么！
     def fastPower(self, a: int, b: int, n: int) -> int:
-        if n == 0:
-            return 1 % b
-        product = self.fastPower(a, b, n // 2)
-        product = (product * product) % b
-        if n % 2 == 1:
-            product = product * a % b
-        return product
+        ans = 1
+        while n > 0:
+            if n & 1 == 1:
+                ans = ans * a % b
+            a = a * a % b  # 一定要对b取余，否则会超时
+            n >>= 1
+        return ans % b

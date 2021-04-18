@@ -5,6 +5,7 @@ class Solution:
     """
 
     def subsets(self, nums: list) -> list:
+        nums.sort()
         queue = [[]]
         index = 0
         while index < len(queue):

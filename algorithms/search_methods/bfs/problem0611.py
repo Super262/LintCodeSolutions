@@ -26,7 +26,7 @@ class Solution:
             return -1
         if (source.x, source.y) == (destination.x, destination.y):
             return 0
-        directions = [(1, 2), (1, -2), (-1, 2), (-1, -2), (2, 1), (2, -1), (-2, 1), (-2, -1)]
+        directions = ((1, 2), (1, -2), (-1, 2), (-1, -2), (2, 1), (2, -1), (-2, 1), (-2, -1))
         forward_queue = self.collections.deque([(source.x, source.y)])
         backward_queue = self.collections.deque([(destination.x, destination.y)])
         forward_visited.add((source.x, source.y))
@@ -41,7 +41,7 @@ class Solution:
                 return distance
         return -1
 
-    def extend_queue(self, queue: collections.deque, grid: list, directions: list, current_visited: set,
+    def extend_queue(self, queue: collections.deque, grid: list, directions: tuple, current_visited: set,
                      opposite_visited: set) -> bool:
         for _ in range(len(queue)):
             x, y = queue.popleft()

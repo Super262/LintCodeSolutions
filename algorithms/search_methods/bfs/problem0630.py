@@ -24,6 +24,8 @@ class Solution:
         import collections
         forward_queue = collections.deque([source])
         backward_queue = collections.deque([destination])
+        forward_visited.add(source)
+        backward_visited.add(destination)
         while forward_queue and backward_queue:
             distance += 1
             if self.extend_queue(forward_queue, grid, forward_directions, forward_visited, backward_visited):

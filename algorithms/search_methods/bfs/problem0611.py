@@ -5,6 +5,8 @@ class Point:
 
 
 class Solution:
+    import collections
+
     """
     @param grid: a chessboard included 0 (false) and 1 (true)
     @param source: a point
@@ -12,35 +14,53 @@ class Solution:
     @return: the shortest path
     """
 
+    # 双向BFS
     def shortestPath(self, grid: list, source: Point, destination: Point) -> int:
-        if not grid:
+        if not grid or not grid[0]:
             return -1
-        h_max = len(grid)
-        w_max = len(grid[0])
-        if source.x >= h_max or source.x < 0 or source.y < 0 or source.y >= w_max or grid[source.x][
-            source.y] == 1:
+        forward_visited = set()
+        backward_visited = set()
+        if not self.node_valid(grid, forward_visited, source.x, source.y):
             return -1
+        if not self.node_valid(grid, backward_visited, destination.x, destination.y):
+            return -1
+        if (source.x, source.y) == (destination.x, destination.y):
+            return 0
         directions = [(1, 2), (1, -2), (-1, 2), (-1, -2), (2, 1), (2, -1), (-2, 1), (-2, -1)]
-        visited = []
-        for _ in range(h_max):
-            visited.append([False] * w_max)
-        import collections
-        q = collections.deque()
-        q.append((source.x, source.y))
-        path_len = -1
-        while len(q) > 0:
-            path_len += 1
-            current_size = len(q)
-            for _ in range(current_size):
-                node = q.popleft()
-                if node[0] == destination.x and node[1] == destination.y and grid[node[0]][node[1]] == 0:
-                    return path_len
-                for d in directions:
-                    next_x = node[0] + d[0]
-                    next_y = node[1] + d[1]
-                    if next_x < 0 or next_x >= h_max or next_y < 0 or next_y >= w_max or grid[next_x][next_y] == 1 or \
-                            visited[next_x][next_y]:
-                        continue
-                    q.append((next_x, next_y))
-                    visited[next_x][next_y] = True
+        forward_queue = self.collections.deque([(source.x, source.y)])
+        backward_queue = self.collections.deque([(destination.x, destination.y)])
+        forward_visited.add((source.x, source.y))
+        backward_visited.add((destination.x, destination.y))
+        distance = 0
+        while forward_queue and backward_queue:
+            distance += 1
+            if self.extend_queue(forward_queue, grid, directions, forward_visited, backward_visited):
+                return distance
+            distance += 1  # 不要忘记这一句！
+            if self.extend_queue(backward_queue, grid, directions, backward_visited, forward_visited):
+                return distance
         return -1
+
+    def extend_queue(self, queue: collections.deque, grid: list, directions: list, current_visited: set,
+                     opposite_visited: set) -> bool:
+        for _ in range(len(queue)):
+            x, y = queue.popleft()
+            for dx, dy in directions:
+                new_x = x + dx
+                new_y = y + dy
+                if not self.node_valid(grid, current_visited, new_x, new_y):
+                    continue
+                if (new_x, new_y) in opposite_visited:
+                    return True
+                queue.append((new_x, new_y))
+                current_visited.add((new_x, new_y))
+        return False
+
+    def node_valid(self, grid: list, visited: set, x: int, y: int) -> bool:
+        if x < 0 or x >= len(grid):
+            return False
+        if y < 0 or y >= len(grid[0]):
+            return False
+        if grid[x][y]:
+            return False
+        return (x, y) not in visited

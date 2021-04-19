@@ -24,13 +24,14 @@ class Solution:
             return -1
         if not self.node_valid(grid, backward_visited, destination.x, destination.y):
             return -1
+        # 这是双向BFS无法处理的特殊情况，需要单独应对！
         if (source.x, source.y) == (destination.x, destination.y):
             return 0
         directions = ((1, 2), (1, -2), (-1, 2), (-1, -2), (2, 1), (2, -1), (-2, 1), (-2, -1))
         forward_queue = self.collections.deque([(source.x, source.y)])
         backward_queue = self.collections.deque([(destination.x, destination.y)])
-        forward_visited.add((source.x, source.y))
-        backward_visited.add((destination.x, destination.y))
+        forward_visited.add((source.x, source.y))  # 不要忘记设置初始节点被访问过
+        backward_visited.add((destination.x, destination.y))  # 不要忘记设置初始节点被访问过
         distance = 0
         while forward_queue and backward_queue:
             distance += 1

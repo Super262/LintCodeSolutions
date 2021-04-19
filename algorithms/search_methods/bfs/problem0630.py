@@ -10,6 +10,7 @@ class Solution:
             return -1
         destination = (len(grid) - 1, len(grid[0]) - 1)
         source = (0, 0)
+        # 这是双向BFS无法处理的特殊情况，需要单独应对！
         if destination == source:
             return 0
         forward_visited = set()
@@ -24,8 +25,8 @@ class Solution:
         import collections
         forward_queue = collections.deque([source])
         backward_queue = collections.deque([destination])
-        forward_visited.add(source)
-        backward_visited.add(destination)
+        forward_visited.add(source)  # 不要忘记设置初始节点被访问过
+        backward_visited.add(destination)  # 不要忘记设置初始节点被访问过
         while forward_queue and backward_queue:
             distance += 1
             if self.extend_queue(forward_queue, grid, forward_directions, forward_visited, backward_visited):

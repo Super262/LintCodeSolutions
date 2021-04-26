@@ -5,6 +5,8 @@ class Solution:
     @return: return the index
     """
 
+    # Robin Karp
+
     def strStr(self, source, target):
         if source is None or target is None:
             return -1

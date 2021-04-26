@@ -16,7 +16,7 @@ class Solution:
         while left < right:
             if num_pairs[left][0] + num_pairs[right][0] < target:
                 left += 1
-            elif num_pairs[left][0] + num_pairs[right][0] < target:
+            elif num_pairs[left][0] + num_pairs[right][0] > target:
                 right -= 1
             else:
                 return sorted([num_pairs[left][1], num_pairs[right][1]])

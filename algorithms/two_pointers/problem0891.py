@@ -14,6 +14,7 @@ class Solution:
     """
 
     def validPalindrome(self, s: str) -> bool:
+        # 学习这种减少重复代码的思路
         start, end, isPa = self.isPalindrome(s, 0, len(s) - 1)
         if isPa:
             return True

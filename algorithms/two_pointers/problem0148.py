@@ -8,12 +8,11 @@ class Solution:
         if not nums:
             return
         ptr = 0
-        len_range = range(len(nums))
-        for i in len_range:
+        for i in range(len(nums)):
             if nums[i] == 0:
                 nums[i], nums[ptr] = nums[ptr], nums[i]
                 ptr += 1
-        for i in len_range:
-            if nums[i] == 1:
-                nums[i], nums[ptr] = nums[ptr], nums[i]
+        for j in range(len(nums)):
+            if nums[j] == 1:
+                nums[j], nums[ptr] = nums[ptr], nums[j]
                 ptr += 1

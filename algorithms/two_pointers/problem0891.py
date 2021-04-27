@@ -15,7 +15,7 @@ class Solution:
 
     def validPalindrome(self, s: str) -> bool:
         # 学习这种减少重复代码的思路
-        start, end, isPa = self.isPalindrome(s, 0, len(s) - 1)
-        if isPa:
+        start, end, is_pa = self.isPalindrome(s, 0, len(s) - 1)
+        if is_pa:
             return True
         return self.isPalindrome(s, start, end - 1)[2] or self.isPalindrome(s, start + 1, end)[2]

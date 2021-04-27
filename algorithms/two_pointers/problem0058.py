@@ -1,15 +1,15 @@
 class Solution:
 
     def fourSum(self, numbers: list, target: int) -> list:
-        results = []
         if not numbers:
-            return results
+            return []
+        if len(numbers) < 4:
+            return []
         bound_d = len(numbers)
-        if bound_d < 4:
-            return results
         bound_b = bound_d - 2
         bound_a = bound_b - 1
         numbers.sort()
+        results = []
         for a in range(bound_a):
             if a > 0 and numbers[a - 1] == numbers[a]:
                 continue

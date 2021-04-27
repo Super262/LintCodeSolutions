@@ -6,13 +6,9 @@ class Solution:
         sum_ab = {}
         for a in A:
             for b in B:
-                if a + b in sum_ab:
-                    sum_ab[a + b] += 1
-                else:
-                    sum_ab[a + b] = 1
+                sum_ab[a + b] = sum_ab.get(a + b, 0) + 1
         result = 0
         for c in C:
             for d in D:
-                if -c - d in sum_ab:
-                    result += sum_ab[-c - d]
+                result += sum_ab.get(-c - d, 0)
         return result

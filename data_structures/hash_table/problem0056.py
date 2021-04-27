@@ -6,16 +6,16 @@ class Solution:
     """
 
     def twoSum(self, numbers: list, target: int) -> list:
-        numbers_dict = dict()
-        expected_set = set()
+        num_to_index = dict()
+        result_pair = set()
         for i in range(len(numbers)):
-            if numbers[i] in numbers_dict:
+            if numbers[i] in num_to_index:
                 # For repeating elements, only remember the first one.
                 continue
-            numbers_dict[numbers[i]] = i
-        for i in range(len(numbers)):
-            t = target - numbers[i]
-            if t in expected_set:
-                return [numbers_dict[t], i]
-            expected_set.add(numbers[i])
+            num_to_index[numbers[i]] = i
+        for j in range(len(numbers)):
+            t = target - numbers[j]
+            if t in result_pair:
+                return [num_to_index[t], j]
+            result_pair.add(numbers[j])
         return [-1, -1]

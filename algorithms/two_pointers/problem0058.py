@@ -1,9 +1,7 @@
 class Solution:
 
     def fourSum(self, numbers: list, target: int) -> list:
-        if not numbers:
-            return []
-        if len(numbers) < 4:
+        if not numbers or len(numbers) < 4:
             return []
         bound_d = len(numbers)
         bound_b = bound_d - 2

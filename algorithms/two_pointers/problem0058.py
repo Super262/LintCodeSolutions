@@ -14,15 +14,17 @@ class Solution:
             for b in range(a + 1, bound_b):
                 if b > a + 1 and numbers[b - 1] == numbers[b]:
                     continue
-                self.two_sum(numbers, b + 1, bound_d - 1, target - numbers[a] - numbers[b], numbers[a], numbers[b],
-                             results)
+                prefix = [numbers[a], numbers[b]]
+                self.two_sum(numbers, b + 1, bound_d - 1, target - numbers[a] - numbers[b], prefix, results)
         return results
 
-    def two_sum(self, sorted_arr: list, start: int, end: int, target: int, prefix1: int, prefix2: int,
-                results: list) -> None:
+    def two_sum(self, sorted_arr: list, start: int, end: int, target: int, prefix: list, results: list) -> None:
         while start < end:
             if sorted_arr[start] + sorted_arr[end] == target:
-                results.append([prefix1, prefix2, sorted_arr[start], sorted_arr[end]])
+                temp = list(prefix)
+                temp.append(sorted_arr[start])
+                temp.append(sorted_arr[end])
+                results.append(temp)
                 end -= 1
                 start += 1
 

@@ -14,6 +14,6 @@ class Solution:
             if nums[start] + nums[end] > target:
                 end -= 1
             else:
-                result += end - start
+                result += end - start  # 这个区间内的所有数字均满足要求
                 start += 1
         return result

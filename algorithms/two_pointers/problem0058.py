@@ -22,17 +22,18 @@ class Solution:
 
     def two_sum(self, sorted_arr: list, start: int, end: int, target: int, prefix1: int, prefix2: int,
                 results: list) -> None:
-        while start < end - 1:
-            if sorted_arr[start] + sorted_arr[end - 1] == target:
-                results.append([prefix1, prefix2, sorted_arr[start], sorted_arr[end - 1]])
+        end -= 1
+        while start < end:
+            if sorted_arr[start] + sorted_arr[end] == target:
+                results.append([prefix1, prefix2, sorted_arr[start], sorted_arr[end]])
                 end -= 1
                 start += 1
 
                 # Don't forget this part!
-                while 0 < start < end - 1 and sorted_arr[start - 1] == sorted_arr[start]:
+                while 0 < start < end and sorted_arr[start - 1] == sorted_arr[start]:
                     start += 1
 
-            elif sorted_arr[start] + sorted_arr[end - 1] > target:
+            elif sorted_arr[start] + sorted_arr[end] > target:
                 end -= 1
             else:
                 start += 1

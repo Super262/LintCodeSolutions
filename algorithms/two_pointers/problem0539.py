@@ -1,14 +1,15 @@
 class Solution:
 
     def moveZeroes(self, nums: list) -> None:
-        # Minimize the total number of operations!
+        # Minimize the total number of write operations!
         if not nums:
             return
         left = 0
         right = 0
         while right < len(nums):
             if nums[right] != 0:
-                nums[left] = nums[right]
+                if left != right:
+                    nums[left] = nums[right]
                 left += 1
             right += 1
         while left < len(nums):

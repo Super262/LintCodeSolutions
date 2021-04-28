@@ -15,15 +15,15 @@ class Solution:
                 i += 1
                 j -= 1
         # Notice that the quantity of positive numbers may not equal to the quantity of negative numbers
-        count_pos = 0
+        count_positive = 0
         for num in A:
             if num > 0:
-                count_pos += 1
-        count_neg = len(A) - count_pos
-        if count_neg > count_pos:
+                count_positive += 1
+        count_negative = len(A) - count_positive
+        if count_negative > count_positive:
             i = 1
             j = len(A) - 1
-        elif count_neg < count_pos:
+        elif count_negative < count_positive:
             i = 0
             j = len(A) - 2
         else:

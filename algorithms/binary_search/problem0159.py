@@ -6,7 +6,10 @@ class Solution:
             return -1
         start = 0
         end = len(nums) - 1
+
+        # 选择最后一个值为"标杆"，以应对特殊情况：正常的排序数组
         target = nums[-1]
+
         while start + 1 < end:
             mid = start + (end - start) // 2
             if nums[mid] < target:

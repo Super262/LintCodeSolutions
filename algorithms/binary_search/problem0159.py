@@ -1,6 +1,7 @@
 class Solution:
 
     def findMin(self, nums: list) -> int:
+        # 输入数据限制：无重复值
         if not nums:
             return -1
         start = 0

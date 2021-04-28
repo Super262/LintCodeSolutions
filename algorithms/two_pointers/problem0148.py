@@ -16,6 +16,7 @@ class Solution:
                 left += 1
                 index += 1
             elif nums[index] == 2:
+                # 在这种情况下，index不变，因为右侧被交换过来的数可能是1或0
                 nums[right], nums[index] = nums[index], nums[right]
                 right -= 1
             else:

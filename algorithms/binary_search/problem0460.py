@@ -45,5 +45,4 @@ class Solution:
         dr = abs(target - nums[right])
         if dl == dr:
             return nums[left] <= nums[right]
-        else:
-            return dl <= dr
+        return dl < dr

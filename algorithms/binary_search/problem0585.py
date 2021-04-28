@@ -11,10 +11,10 @@ class Solution:
         end = len(nums) - 1
         while start < end:
             mid = start + (end - start) // 2
-            if mid + 1 <= end and nums[mid + 1] >= nums[mid]:
+            if mid + 1 <= end and nums[mid + 1] > nums[mid]:
                 start = mid + 1
                 continue
-            if mid - 1 >= start and nums[mid - 1] >= nums[mid]:
+            if mid - 1 >= start and nums[mid - 1] > nums[mid]:
                 end = mid - 1
                 continue
             return nums[mid]

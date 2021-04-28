@@ -18,6 +18,7 @@ class Solution:
     def bfs(self, m: list, visited: list, start: int) -> None:
         import collections
         q = collections.deque([start])
+        visited[start] = True
         while q:
             node = q.popleft()
             for i in range(len(m[node])):

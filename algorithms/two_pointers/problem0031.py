@@ -8,6 +8,7 @@ class Solution:
         while left <= right:
             while left <= right and nums[left] < k:
                 left += 1
+            # 快速排序的边界不包含"等于"的情况，这里是"非左即右"！
             while left <= right and nums[right] >= k:
                 right -= 1
             if left <= right:

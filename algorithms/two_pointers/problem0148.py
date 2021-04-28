@@ -7,12 +7,16 @@ class Solution:
     def sortColors(self, nums: list) -> None:
         if not nums:
             return
-        ptr = 0
-        for i in range(len(nums)):
-            if nums[i] == 0:
-                nums[i], nums[ptr] = nums[ptr], nums[i]
-                ptr += 1
-        for j in range(len(nums)):
-            if nums[j] == 1:
-                nums[j], nums[ptr] = nums[ptr], nums[j]
-                ptr += 1
+        left = 0
+        right = len(nums) - 1
+        index = 0
+        while index <= right:
+            if nums[index] == 0:
+                nums[left], nums[index] = nums[index], nums[left]
+                left += 1
+                index += 1
+            elif nums[index] == 2:
+                nums[right], nums[index] = nums[index], nums[right]
+                right -= 1
+            else:
+                index += 1

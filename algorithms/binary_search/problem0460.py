@@ -1,11 +1,11 @@
 class Solution:
 
     def kClosestNumbers(self, A: list, target: int, k: int) -> list:
-        result = []
         if not A:
-            return result
+            return []
         right = self.find_closest_upper(A, target)
         left = right - 1
+        result = []
         for _ in range(k):
             if self.is_left_closer(A, left, target, right):
                 result.append(A[left])

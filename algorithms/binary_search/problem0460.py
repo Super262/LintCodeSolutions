@@ -1,18 +1,20 @@
 class Solution:
 
     def kClosestNumbers(self, A: list, target: int, k: int) -> list:
-        if not A:
+        if not A or len(A) < k:
             return []
         right = self.find_closest_upper(A, target)
         left = right - 1
-        result = []
+        result = [0] * k
+        res_p = 0
         for _ in range(k):
             if self.is_left_closer(A, left, target, right):
-                result.append(A[left])
+                result[res_p] = A[left]
                 left -= 1
             else:
-                result.append(A[right])
+                result[res_p] = A[right]
                 right += 1
+            res_p += 1
         return result
 
     def find_closest_upper(self, nums: list, target: int) -> int:

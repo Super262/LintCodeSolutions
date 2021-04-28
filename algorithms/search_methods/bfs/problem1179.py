@@ -5,7 +5,7 @@ class Solution:
     """
 
     def findCircleNum(self, m: list) -> int:
-        if not m:
+        if not m or not m[0]:
             return 0
         visited = [False] * len(m)
         count = 0
